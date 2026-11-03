@@ -1,0 +1,301 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:72da3041-b3c7-4a6b-a87c-bafd1e044a99",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-02T03:31:25Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "quantum-audit",
+          "version": "0.3.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "marathon-app-tooling-testing",
+      "bom-ref": "app:marathon-app-tooling-testing",
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-completeness",
+          "value": "incomplete-or-unknown"
+        },
+        {
+          "name": "paloit:quantum-agent:repository-commit",
+          "value": "unknown"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "application",
+      "name": "marathon-app-tooling-testing",
+      "bom-ref": "app:marathon-app-tooling-testing",
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-completeness",
+          "value": "incomplete-or-unknown"
+        },
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "RSA-OAEP",
+      "bom-ref": "crypto:algorithm:rsa-oaep",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "algorithmFamily": "RSAES-OAEP",
+          "padding": "oaep",
+          "cryptoFunctions": ["keygen", "encrypt", "decrypt"],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app.js",
+            "line": 145,
+            "symbol": "crypto.subtle.generateKey"
+          },
+          {
+            "location": "app.js",
+            "line": 57,
+            "symbol": "crypto.subtle.encrypt"
+          },
+          {
+            "location": "app.js",
+            "line": 63,
+            "symbol": "crypto.subtle.decrypt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-vulnerable"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-status",
+          "value": "project-mapped"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-source",
+          "value": "Bundled NIST Security-Level Mapping reference: 'RSA, finite-field DH/DSA, elliptic-curve DH/signature families' row -> level 0, project-mapped"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-rule-version",
+          "value": "1.0"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "SHA-256",
+      "bom-ref": "crypto:algorithm:sha-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "algorithmFamily": "SHA-2",
+          "parameterSetIdentifier": "256",
+          "cryptoFunctions": ["digest"]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app.js",
+            "line": 150,
+            "symbol": "generateKey({ hash: \"SHA-256\" })"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-resistant-at-appropriate-strength"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "RSA-OAEP public key",
+      "bom-ref": "crypto:key:rsa-public",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "size": 2048,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:rsa-oaep" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app.js",
+            "line": 145,
+            "symbol": "rsaKeyPair.publicKey (generateKey)"
+          },
+          {
+            "location": "app.js",
+            "line": 57,
+            "symbol": "rsaKeyPair.publicKey (crypto.subtle.encrypt)"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-vulnerable"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "RSA-OAEP private key",
+      "bom-ref": "crypto:key:rsa-private",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "size": 2048,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:rsa-oaep" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app.js",
+            "line": 145,
+            "symbol": "rsaKeyPair.privateKey (generateKey, extractable: false)"
+          },
+          {
+            "location": "app.js",
+            "line": 63,
+            "symbol": "rsaKeyPair.privateKey (crypto.subtle.decrypt)"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-vulnerable"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "RSA-OAEP ciphertext",
+      "bom-ref": "crypto:material:rsa-oaep-ciphertext",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "ciphertext",
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:rsa-oaep" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app.js",
+            "line": 58,
+            "symbol": "toHex(new Uint8Array(encryptedBuffer))"
+          },
+          {
+            "location": "app.js",
+            "line": 59,
+            "symbol": "flowCiphertext.textContent = ciphertext"
+          },
+          {
+            "location": "app.js",
+            "line": 104,
+            "symbol": "encryptedValue.textContent = ciphertext"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "Web Crypto API",
+      "bom-ref": "lib:web-crypto-api",
+      "description": "Browser-native SubtleCrypto implementation; no npm/package dependency, no locally inspectable implementation source.",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app.js",
+            "line": 145,
+            "symbol": "crypto.subtle.generateKey"
+          },
+          {
+            "location": "app.js",
+            "line": 57,
+            "symbol": "crypto.subtle.encrypt"
+          },
+          {
+            "location": "app.js",
+            "line": 63,
+            "symbol": "crypto.subtle.decrypt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "direct-application-call; implementation delegated to host browser, not locally inspectable"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app:marathon-app-tooling-testing",
+      "dependsOn": ["crypto:algorithm:rsa-oaep", "lib:web-crypto-api"]
+    },
+    {
+      "ref": "crypto:algorithm:rsa-oaep",
+      "dependsOn": ["crypto:algorithm:sha-256", "crypto:key:rsa-private", "crypto:key:rsa-public"]
+    },
+    {
+      "ref": "crypto:algorithm:sha-256",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:key:rsa-private",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:key:rsa-public",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:material:rsa-oaep-ciphertext",
+      "dependsOn": ["crypto:algorithm:rsa-oaep"]
+    },
+    {
+      "ref": "lib:web-crypto-api",
+      "dependsOn": []
+    }
+  ]
+}

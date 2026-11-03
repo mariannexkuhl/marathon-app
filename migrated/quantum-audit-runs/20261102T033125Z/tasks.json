@@ -1,0 +1,44 @@
+{
+  "tasks": [
+    {
+      "id": "design-01",
+      "files": []
+    },
+    {
+      "id": "design-02",
+      "files": []
+    },
+    {
+      "id": "design-03",
+      "files": []
+    },
+    {
+      "id": "install-01",
+      "files": ["package.json", "package-lock.json"]
+    },
+    {
+      "id": "task-01",
+      "files": ["app.js"]
+    },
+    {
+      "id": "task-02",
+      "files": ["app.js"]
+    },
+    {
+      "id": "task-03",
+      "files": ["app.js"]
+    },
+    {
+      "id": "task-04",
+      "files": ["app.js"]
+    },
+    {
+      "id": "task-05",
+      "files": ["index.html"]
+    },
+    {
+      "id": "task-06",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f2ed">
+    <meta name="description" content="A local message encryption demo using ML-KEM-768 + AES-256-GCM.">
+    <title>Marathon | ML-KEM message demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.bundle.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="wordmark" href="#top" aria-label="Marathon home">
+          <span class="wordmark-mark" aria-hidden="true">M</span>
+          <span>marathon</span>
+        </a>
+        <div class="session-indicator"><span class="session-dot"></span>Local session</div>
+      </header>
+
+      <main id="top">
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow"><span class="eyebrow-line"></span>ML-KEM + AES-256-GCM MESSAGE DEMO</p>
+          <h1 id="page-title">Lock a thought.<br><span>Unlock it again.</span></h1>
+          <p class="intro-copy">Watch a short message become ciphertext, then return to readable text using the matching private key.</p>
+        </section>
+
+        <section class="workspace" aria-label="Message workspace">
+          <form class="composer" id="message-form">
+            <div class="panel-heading">
+              <div>
+                <p class="section-index">01 <span>/ ENCRYPT</span></p>
+                <h2>Write a message</h2>
+              </div>
+              <span class="direction-label"><span aria-hidden="true">↗</span> ML-KEM + AES-256-GCM</span>
+            </div>
+
+            <label class="sr-only" for="message-input">Your message</label>
+            <textarea id="message-input" name="message" maxlength="1000" placeholder="Enter up to 1000 UTF-8 bytes" required></textarea>
+            <div class="composer-footer">
+              <span class="character-count" id="character-count">0 / 1000 bytes</span>
+              <button class="send-button" id="send-button" type="submit" disabled>
+                <span>Encrypt message</span><span class="send-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <p class="form-status" id="form-status" aria-live="polite"></p>
+          </form>
+
+          <section class="encryption-demo" aria-labelledby="demo-title" aria-live="polite">
+            <div class="demo-heading">
+              <p class="section-index">LIVE <span>/ TRANSFORM</span></p>
+              <h2 id="demo-title">Message in motion</h2>
+            </div>
+            <ol class="encryption-flow" aria-label="Encryption and decryption steps">
+              <li class="flow-step" data-step="encrypt">
+                <span class="flow-number">01</span>
+                <span class="flow-name">Plaintext</span>
+                <code class="flow-value" id="flow-plaintext">Your message appears here</code>
+              </li>
+              <li class="flow-step" data-step="ciphertext">
+                <span class="flow-number">02</span>
+                <span class="flow-name">ML-KEM + AES-256-GCM ciphertext</span>
+                <code class="flow-value" id="flow-ciphertext">Waiting for encryption</code>
+              </li>
+              <li class="flow-step" data-step="decrypt">
+                <span class="flow-number">03</span>
+                <span class="flow-name">Decrypted message</span>
+                <code class="flow-value" id="flow-recovered">Waiting for decryption</code>
+              </li>
+            </ol>
+            <p class="flow-status" id="flow-status" role="status">Preparing ML-KEM keypair…</p>
+          </section>
+
+          <section class="inbox" aria-labelledby="inbox-title">
+            <div class="panel-heading inbox-heading">
+              <div>
+                <p class="section-index">02 <span>/ RESULTS</span></p>
+                <h2 id="inbox-title">Completed messages <span class="message-count" id="message-count">00</span></h2>
+              </div>
+              <span class="read-only-label"><span class="lock-mark" aria-hidden="true">▤</span> Read only</span>
+            </div>
+
+            <div class="empty-state" id="empty-state">
+              <span class="empty-symbol" aria-hidden="true">↘</span>
+              <p>No messages processed.</p>
+              <span>Encrypted results will appear here.</span>
+            </div>
+            <ol class="message-list" id="message-list" aria-live="polite" aria-relevant="additions"></ol>
+          </section>
+        </section>
+
+        <aside class="integrity-note" aria-label="Important information about this demo's cryptography">
+          <span class="note-mark" aria-hidden="true">i</span>
+          <p><strong>Demo only.</strong> This demo encapsulates a shared secret with ML-KEM-768 (a final NIST post-quantum standard, FIPS 203), derives an AES-256 key from it with HKDF-SHA-256, and encrypts the message with AES-256-GCM. Messages are limited to 1000 UTF-8 bytes. Keys and messages stay in page memory.</p>
+          <span class="algorithm-tag">ML-KEM-768 + AES-256-GCM</span>
+        </aside>
+      </main>
+
+      <footer class="footer">
+        <span>MARATHON <span class="footer-separator">/</span> LOCAL CRYPTO DEMO</span>
+        <span>Messages clear when this page is reloaded.</span>
+      </footer>
+    </div>
+  </body>
+</html>

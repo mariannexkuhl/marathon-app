@@ -1,0 +1,60 @@
+{
+  "approvals": [
+    {
+      "kind": "design",
+      "id": "01",
+      "status": "approved"
+    },
+    {
+      "kind": "design",
+      "id": "02",
+      "status": "approved"
+    },
+    {
+      "kind": "install",
+      "id": "01",
+      "status": "approved"
+    },
+    {
+      "kind": "task",
+      "id": "01",
+      "status": "approved",
+      "files": []
+    },
+    {
+      "kind": "task",
+      "id": "02",
+      "status": "approved",
+      "files": []
+    },
+    {
+      "kind": "task",
+      "id": "03",
+      "status": "approved",
+      "files": []
+    },
+    {
+      "kind": "task",
+      "id": "04",
+      "status": "approved",
+      "files": []
+    },
+    {
+      "kind": "task",
+      "id": "05",
+      "status": "approved",
+      "files": []
+    },
+    {
+      "kind": "task",
+      "id": "06",
+      "status": "approved",
+      "files": []
+    },
+    {
+      "kind": "design",
+      "id": "03",
+      "status": "approved"
+    }
+  ]
+}

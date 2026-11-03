@@ -1,0 +1,570 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:b6f2a9c1-6e3d-4f5a-9b2c-8a1d4e7f3c20",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-02T03:52:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "quantum-audit",
+          "version": "0.3.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "marathon-app-tooling-testing",
+      "bom-ref": "app:marathon-app-tooling-testing",
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-completeness",
+          "value": "incomplete-or-unknown"
+        },
+        {
+          "name": "paloit:quantum-agent:repository-commit",
+          "value": "unknown"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "application",
+      "name": "marathon-app-tooling-testing",
+      "bom-ref": "app:marathon-app-tooling-testing",
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-completeness",
+          "value": "incomplete-or-unknown"
+        },
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-KEM-768",
+      "bom-ref": "crypto:algorithm:ml-kem-768",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "algorithmFamily": "ML-KEM",
+          "parameterSetIdentifier": "768",
+          "cryptoFunctions": ["keygen", "encapsulate", "decapsulate"],
+          "nistQuantumSecurityLevel": 3
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 1, "symbol": "import { ml_kem768 } from \"@noble/post-quantum/ml-kem.js\"" },
+          { "location": "app.js", "line": 177, "symbol": "ml_kem768.keygen()" },
+          { "location": "app.js", "line": 60, "symbol": "ml_kem768.encapsulate(kemKeyPair.publicKey)" },
+          { "location": "app.js", "line": 70, "symbol": "ml_kem768.decapsulate(kemCipherText, kemKeyPair.secretKey)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-resistant-at-appropriate-strength"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-status",
+          "value": "nist-specified"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-source",
+          "value": "Bundled NIST Security-Level Mapping reference: 'ML-KEM-512 / 768 / 1024' row, exact parameter set ML-KEM-768 matched to FIPS 203 -> level 3"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-rule-version",
+          "value": "1.0"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-KEM-768 public key",
+      "bom-ref": "crypto:key:ml-kem-768-public",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "size": 9472,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:ml-kem-768" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 177, "symbol": "kemKeyPair.publicKey (ml_kem768.keygen())" },
+          { "location": "app.js", "line": 60, "symbol": "kemKeyPair.publicKey (ml_kem768.encapsulate)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-resistant-at-appropriate-strength"
+        },
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "size evidenced from node_modules/@noble/post-quantum/ml-kem.js doc comment citing FIPS 203 Table 3 (1184 bytes for k=3 / ML-KEM-768)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-KEM-768 private key",
+      "bom-ref": "crypto:key:ml-kem-768-private",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "size": 19200,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:ml-kem-768" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 177, "symbol": "kemKeyPair.secretKey (ml_kem768.keygen())" },
+          { "location": "app.js", "line": 70, "symbol": "kemKeyPair.secretKey (ml_kem768.decapsulate)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-resistant-at-appropriate-strength"
+        },
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "the library API names this field 'secretKey'; modelled as CycloneDX 'private-key' since it is the non-shared half of an asymmetric KEM keypair. Size evidenced from FIPS 203 Table 3 (2400 bytes for k=3 / ML-KEM-768)."
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-KEM-768 shared secret",
+      "bom-ref": "crypto:material:ml-kem-768-shared-secret",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "shared-secret",
+          "size": 256,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:ml-kem-768" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 60, "symbol": "sharedSecret (ml_kem768.encapsulate)" },
+          { "location": "app.js", "line": 70, "symbol": "recoveredSharedSecret (ml_kem768.decapsulate)" },
+          { "location": "app.js", "line": 61, "symbol": "deriveAesKey(sharedSecret)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-KEM-768 ciphertext",
+      "bom-ref": "crypto:material:ml-kem-768-ciphertext",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "ciphertext",
+          "size": 8704,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:ml-kem-768" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 60, "symbol": "kemCipherText (ml_kem768.encapsulate)" },
+          { "location": "app.js", "line": 70, "symbol": "kemCipherText (ml_kem768.decapsulate)" },
+          { "location": "app.js", "line": 64, "symbol": "concatBytes(kemCipherText, iv, aeadCipherText) -> displayed ciphertext" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        },
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "size evidenced from FIPS 203 Table 3 (1088 bytes for k=3 / ML-KEM-768)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "HKDF-SHA-256",
+      "bom-ref": "crypto:algorithm:hkdf-sha256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kdf",
+          "algorithmFamily": "HKDF",
+          "cryptoFunctions": ["keyderive"]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 154, "symbol": "async function deriveAesKey(sharedSecret)" },
+          { "location": "app.js", "line": 155, "symbol": "crypto.subtle.importKey(\"raw\", sharedSecret, \"HKDF\", false, [\"deriveKey\"])" },
+          { "location": "app.js", "line": 156, "symbol": "crypto.subtle.deriveKey({ name: \"HKDF\", hash: \"SHA-256\", salt, info }, ...)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "parameter-and-purpose-dependent"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "SHA-256",
+      "bom-ref": "crypto:algorithm:sha-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "algorithmFamily": "SHA-2",
+          "parameterSetIdentifier": "256",
+          "cryptoFunctions": ["digest"]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 157, "symbol": "deriveKey({ name: \"HKDF\", hash: \"SHA-256\", ... })" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-resistant-at-appropriate-strength"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-256-GCM",
+      "bom-ref": "crypto:algorithm:aes-256-gcm",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "algorithmFamily": "AES",
+          "parameterSetIdentifier": "256",
+          "mode": "gcm",
+          "cryptoFunctions": ["encrypt", "decrypt"],
+          "nistQuantumSecurityLevel": 5
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 63, "symbol": "crypto.subtle.encrypt({ name: \"AES-GCM\", iv }, aesKey, messageBytes)" },
+          { "location": "app.js", "line": 72, "symbol": "crypto.subtle.decrypt({ name: \"AES-GCM\", iv }, recoveredAesKey, aeadCipherText)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "quantum-resistant-at-appropriate-strength"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-status",
+          "value": "project-mapped"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-source",
+          "value": "Bundled NIST Security-Level Mapping reference: 'AES-128 / AES-192 / AES-256' row -> level 5, project-mapped"
+        },
+        {
+          "name": "paloit:quantum-agent:security-level-rule-version",
+          "value": "1.0"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-256-GCM derived key",
+      "bom-ref": "crypto:key:aes-256-gcm-key",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "secret-key",
+          "size": 256,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:hkdf-sha256" },
+            { "type": "algorithm", "ref": "crypto:algorithm:aes-256-gcm" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 156, "symbol": "crypto.subtle.deriveKey(..., { name: \"AES-GCM\", length: 256 }, false, [\"encrypt\", \"decrypt\"])" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-GCM initialization vector",
+      "bom-ref": "crypto:material:aes-gcm-iv",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "initialization-vector",
+          "size": 96,
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:aes-256-gcm" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 62, "symbol": "crypto.getRandomValues(new Uint8Array(12))" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-256-GCM ciphertext",
+      "bom-ref": "crypto:material:aes-gcm-ciphertext",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "ciphertext",
+          "relatedCryptographicAssets": [
+            { "type": "algorithm", "ref": "crypto:algorithm:aes-256-gcm" }
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 63, "symbol": "aeadBuffer -> aeadCipherText" },
+          { "location": "app.js", "line": 64, "symbol": "concatBytes(kemCipherText, iv, aeadCipherText) -> displayed ciphertext" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "gen-e2:quantum-classification",
+          "value": "not-classified"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "Web Crypto API",
+      "bom-ref": "lib:web-crypto-api",
+      "description": "Browser-native SubtleCrypto implementation; no npm/package dependency, no locally inspectable implementation source.",
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 62, "symbol": "crypto.getRandomValues" },
+          { "location": "app.js", "line": 63, "symbol": "crypto.subtle.encrypt" },
+          { "location": "app.js", "line": 72, "symbol": "crypto.subtle.decrypt" },
+          { "location": "app.js", "line": 155, "symbol": "crypto.subtle.importKey" },
+          { "location": "app.js", "line": 156, "symbol": "crypto.subtle.deriveKey" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "direct-application-call; implementation delegated to host browser, not locally inspectable"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@noble/post-quantum",
+      "version": "0.7.1",
+      "bom-ref": "lib:noble-post-quantum",
+      "purl": "pkg:npm/%40noble/post-quantum@0.7.1",
+      "evidence": {
+        "occurrences": [
+          { "location": "app.js", "line": 1, "symbol": "import { ml_kem768 } from \"@noble/post-quantum/ml-kem.js\"" },
+          { "location": "package.json", "symbol": "dependencies[\"@noble/post-quantum\"] = \"^0.7.1\"" },
+          { "location": "package-lock.json", "symbol": "@noble/post-quantum@0.7.1 (resolved, exact)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "direct production dependency; installed local source at node_modules/@noble/post-quantum/ml-kem.js inspected and matches locked version"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@noble/hashes",
+      "version": "2.4.0",
+      "bom-ref": "lib:noble-hashes",
+      "purl": "pkg:npm/%40noble/hashes@2.4.0",
+      "evidence": {
+        "occurrences": [
+          { "location": "package-lock.json", "symbol": "@noble/hashes@2.4.0 (transitive, resolved, exact)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "transitive dependency of @noble/post-quantum, reached: ml-kem.js imports sha3.js and utils.js from this package directly"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@noble/curves",
+      "version": "2.4.0",
+      "bom-ref": "lib:noble-curves",
+      "purl": "pkg:npm/%40noble/curves@2.4.0",
+      "evidence": {
+        "occurrences": [
+          { "location": "package-lock.json", "symbol": "@noble/curves@2.4.0 (transitive, resolved, exact)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "transitive dependency of @noble/post-quantum, reached only narrowly: ml-kem.js -> _crystals.js -> abstract/fft.js for NTT polynomial arithmetic, not for any elliptic-curve operation"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@noble/ciphers",
+      "version": "2.4.0",
+      "bom-ref": "lib:noble-ciphers",
+      "purl": "pkg:npm/%40noble/ciphers@2.4.0",
+      "evidence": {
+        "occurrences": [
+          { "location": "package-lock.json", "symbol": "@noble/ciphers@2.4.0 (transitive, resolved, exact)" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "transitive dependency declared by @noble/post-quantum's own package.json, but NOT reached by this application: only imported by that package's falcon.js and hybrid.js modules, neither of which app.js imports. Presence-only; no evidenced invocation."
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "esbuild",
+      "version": "0.28.2",
+      "bom-ref": "lib:esbuild",
+      "purl": "pkg:npm/esbuild@0.28.2",
+      "evidence": {
+        "occurrences": [
+          { "location": "package.json", "symbol": "devDependencies[\"esbuild\"] = \"^0.28.2\"" }
+        ]
+      },
+      "properties": [
+        {
+          "name": "paloit:quantum-agent:inventory-confidence",
+          "value": "dev-only build tool (bundler); not crypto-relevant, not imported by application runtime code"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app:marathon-app-tooling-testing",
+      "dependsOn": ["crypto:algorithm:aes-256-gcm", "crypto:algorithm:hkdf-sha256", "crypto:algorithm:ml-kem-768", "lib:noble-post-quantum", "lib:web-crypto-api"]
+    },
+    {
+      "ref": "crypto:algorithm:ml-kem-768",
+      "dependsOn": ["crypto:key:ml-kem-768-private", "crypto:key:ml-kem-768-public"]
+    },
+    {
+      "ref": "crypto:key:ml-kem-768-public",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:key:ml-kem-768-private",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:material:ml-kem-768-shared-secret",
+      "dependsOn": ["crypto:algorithm:ml-kem-768"]
+    },
+    {
+      "ref": "crypto:material:ml-kem-768-ciphertext",
+      "dependsOn": ["crypto:algorithm:ml-kem-768"]
+    },
+    {
+      "ref": "crypto:algorithm:hkdf-sha256",
+      "dependsOn": ["crypto:algorithm:sha-256", "crypto:material:ml-kem-768-shared-secret"]
+    },
+    {
+      "ref": "crypto:algorithm:sha-256",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:algorithm:aes-256-gcm",
+      "dependsOn": ["crypto:key:aes-256-gcm-key"]
+    },
+    {
+      "ref": "crypto:key:aes-256-gcm-key",
+      "dependsOn": ["crypto:algorithm:hkdf-sha256"]
+    },
+    {
+      "ref": "crypto:material:aes-gcm-iv",
+      "dependsOn": []
+    },
+    {
+      "ref": "crypto:material:aes-gcm-ciphertext",
+      "dependsOn": ["crypto:algorithm:aes-256-gcm"]
+    },
+    {
+      "ref": "lib:web-crypto-api",
+      "dependsOn": []
+    },
+    {
+      "ref": "lib:noble-post-quantum",
+      "dependsOn": ["lib:noble-curves", "lib:noble-hashes"]
+    },
+    {
+      "ref": "lib:noble-hashes",
+      "dependsOn": []
+    },
+    {
+      "ref": "lib:noble-curves",
+      "dependsOn": []
+    },
+    {
+      "ref": "lib:noble-ciphers",
+      "dependsOn": []
+    },
+    {
+      "ref": "lib:esbuild",
+      "dependsOn": []
+    }
+  ]
+}
